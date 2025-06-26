@@ -1,9 +1,9 @@
 const WebSocket = require('ws');
 const http = require('http');
 const { io } = require('socket.io-client');
+const config = require('./config');
 
-// Conectar como cliente al servidor NestJS vía socket.io
-const socketNest = io('http://127.0.0.1:3601');
+const socketNest = io(config.nestHost);
 
 socketNest.on('connect', () => {
   console.log('Conectado a NestJS vía socket.io');
@@ -26,7 +26,7 @@ wss.on('connection', (ws) => {
       const data = JSON.parse(msg);
 
       // Enviar al servidor NestJS vía socket.io
-      socketNest.emit('gps_data', data);
+      socketNest.emit(config.nestChannel, data);
 
       // Puedes también confirmar al cliente WebSocket 
       ws.send(JSON.stringify({ status: 'ok', forwarded: true }));
@@ -41,7 +41,6 @@ wss.on('connection', (ws) => {
   });
 });
 
-const PORT = 3602;
-server.listen(PORT, () => {
-  console.log(`Servidor WS puro escuchando en ws://localhost:${PORT}`);
+server.listen(config.port, '0.0.0.0', () => {
+  console.log(`Servidor WS puro escuchando en ws://localhost:${config.port}`);
 });
