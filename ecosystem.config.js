@@ -24,4 +24,4 @@ module.exports = {
             NEST_EVENT: 'gps_data'
         },
     }]
-}
+} 
