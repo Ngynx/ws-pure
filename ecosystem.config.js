@@ -17,5 +17,11 @@ module.exports = {
             NEST_HOST: 'http://34.123.179.130:3601',
             NEST_EVENT: 'gps_data'
         },
+        env_production_cerro_colorado: {
+            NODE_ENV: 'ccproduction',
+            PORT: 3602,
+            NEST_HOST: 'http://34.44.113.186:3601',
+            NEST_EVENT: 'gps_data'
+        },
     }]
-}
+} 
